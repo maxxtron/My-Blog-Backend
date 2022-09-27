@@ -66,8 +66,13 @@ app.post('/uploads', checkAuth, upload.single('image'), (req,res) => {
 
 //создаем новый route
 
+app.get('/tags', PostController.getLastTags)
+
 //получаем все статьи
 app.get('/posts', PostController.getAll)
+
+//получаем теги
+app.get('/posts/tegs', PostController.getLastTags)
 
 //получаем одну статью по динамическому параметру
 app.get('/posts/:id', PostController.getOne)

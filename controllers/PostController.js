@@ -27,6 +27,26 @@ export const create  = async (req, res) => {
     }
 }
 
+//получаем все теги
+export const getLastTags = async (req, res) => {
+    try{
+         //находим все тэги по 5 статьях
+        const posts = await PostModel.find().limit(5).exec()
+
+        //зи массива надо взять все статьи и взять последние 5 тэгов
+        const tags = posts.map(obj => obj.tags).flat().slice(0, 5)
+        const uniqueTags = [...new Set(tags)]
+
+        //возвращаем массив статей
+        res.json(uniqueTags)
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: 'Не удалось получить тэги'
+        })
+}
+}
 //получаем все статьи
 export const getAll = async (req,res) => {
     try{
