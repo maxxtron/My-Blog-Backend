@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import {loginValidation, postCreateValidation, registerValidation} from './validations.js'
 import {checkAuth, handleValidationErrors} from './utils/index.js';
 import {PostController, UserController} from "./controllers/index.js";
-
+import cors from 'cors'
 
 //подключаемся к mongoDB с помощу mongoose (blog - база данных)
 mongoose.connect('mongodb+srv://maxxtron:zx40wi3o@cluster0.rcmdjgy.mongodb.net/blog?retryWrites=true&w=majority')
@@ -33,6 +33,9 @@ const upload = multer({ storage })
 
 //учим приложение распозновать json
 app.use(express.json())
+
+//убираем ошибку cors
+app.use(cors())
 
 //если приходит любой запрос с upload
 app.use('/uploads', express.static('uploads'))
